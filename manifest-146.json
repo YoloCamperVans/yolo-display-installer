@@ -1,0 +1,16 @@
+{
+  "name": "Yolo VanDisplay 1.46",
+  "version": "1.0.0",
+  "new_install_prompt_erase": true,
+  "builds": [
+    {
+      "chipFamily": "ESP32-S3",
+      "parts": [
+        { "path": "firmware/vandisplay-146-bootloader.bin", "offset": 0 },
+        { "path": "firmware/vandisplay-146-partitions.bin", "offset": 32768 },
+        { "path": "firmware/vandisplay-146-boot_app0.bin", "offset": 57344 },
+        { "path": "firmware/vandisplay-146-app.bin", "offset": 65536 }
+      ]
+    }
+  ]
+}

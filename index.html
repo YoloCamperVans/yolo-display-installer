@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yolo Campervans · Display Installer</title>
+<script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"></script>
+<style>
+  :root { --ink:#1d1d1b; --muted:#6b6a64; --line:#e4e2da; --bg:#faf9f5; --accent:#e0701e; --navy:#233746; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; color:var(--ink); background:var(--bg); line-height:1.6; }
+  main { max-width:640px; margin:0 auto; padding:48px 20px 64px; }
+  .brand { font-weight:800; letter-spacing:.08em; font-size:14px; color:var(--accent); }
+  h1 { font-size:30px; margin:6px 0 8px; }
+  p.lead { color:var(--muted); margin:0 0 32px; }
+  .card { background:#fff; border:1px solid var(--line); border-radius:14px; padding:24px; margin-bottom:20px; }
+  .card h2 { font-size:18px; margin:0 0 12px; }
+  ol, ul { padding-left:20px; margin:0; }
+  li { margin-bottom:10px; }
+  esp-web-install-button button[slot="activate"] {
+    font-size:17px; font-weight:600; padding:14px 28px; border:0; border-radius:10px;
+    background:var(--accent); color:#fff; cursor:pointer; width:100%;
+  }
+  .board { display:flex; gap:12px; align-items:center; background:#f6f4ee; border-radius:10px; padding:12px 14px; margin-bottom:6px; }
+  .board b { display:block; }
+  .warn { font-size:14px; color:#8a4b0f; background:#fdf1e4; border-radius:10px; padding:12px 14px; }
+  .small { font-size:14px; color:var(--muted); }
+  code { background:#f1efe8; padding:1px 6px; border-radius:4px; }
+</style>
+</head>
+<body>
+<main>
+  <div class="brand">YOLO CAMPERVANS</div>
+  <h1>Display installer</h1>
+  <p class="lead">Put the Yolo power dashboard on your display in about two minutes. Nothing to download or install.</p>
+
+  <div class="card">
+    <h2>What you need</h2>
+    <div class="board"><div><b>Waveshare ESP32-S3-Touch-LCD-1.46</b><span class="small">Round 1.46" touch display. Other boards or versions won't work.</span></div></div>
+    <ul style="margin-top:12px">
+      <li>A USB-C <b>data</b> cable (some cables only charge)</li>
+      <li>A computer with Chrome, Edge, Opera or Firefox (not Safari, not a phone)</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>1. Install</h2>
+    <ol>
+      <li>Plug the display into this computer.</li>
+      <li>Click <b>Install</b>, choose the port that appears (often "USB JTAG/serial debug unit"), and confirm.</li>
+      <li>Wait for "Installation complete" (1–2 minutes). Don't unplug during install.</li>
+    </ol>
+    <p id="unsupported" class="warn" hidden>This browser can't install firmware. Use Chrome, Edge, Opera or Firefox on a computer.</p>
+    <div style="margin-top:18px">
+      <esp-web-install-button manifest="manifest-146.json">
+        <button slot="activate">Install</button>
+        <span slot="unsupported"></span>
+        <span slot="not-allowed">This page must be opened over https.</span>
+      </esp-web-install-button>
+    </div>
+    <p class="small" style="margin-top:14px">No port showing? Unplug, hold the <b>BOOT</b> button, plug back in, release, and try again.</p>
+  </div>
+
+  <div class="card">
+    <h2>2. See it working right away</h2>
+    <p style="margin:0">The display restarts in <b>demo mode</b> with sample numbers, so you know it works. Mount it and finish your build. No Cerbo GX needed yet.</p>
+  </div>
+
+  <div class="card">
+    <h2>3. Connect your Cerbo GX (when it's installed)</h2>
+    <ol>
+      <li>On the Cerbo GX, go to <b>Settings → Services</b> and turn on <b>MQTT on LAN</b>.</li>
+      <li><b>Hold the display's screen for 3 seconds.</b> It shows <b>Setup mode</b> and a network name like <code>YOLO-Setup-1A2B</code>.</li>
+      <li>On your phone, join that Wi-Fi network. A setup page opens (if not, browse to <code>192.168.4.1</code>).</li>
+      <li>Pick your van's Wi-Fi, enter the password and the Cerbo address (usually <code>venus.local</code>), then tap <b>Save and connect</b>.</li>
+      <li>The display shows "LINKED" and your live numbers. Done.</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h2>Troubleshooting</h2>
+    <ul>
+      <li><b>"Looking for Cerbo" doesn't change:</b> check MQTT on LAN is on, or enter the Cerbo's IP address instead of <code>venus.local</code> (hold the screen 3 s to change it).</li>
+      <li><b>"No Wi-Fi":</b> check the Wi-Fi name and password in setup mode.</li>
+      <li><b>Start over:</b> hold <b>BOOT</b> for 5 seconds while powering on. The display returns to demo mode.</li>
+      <li><b>Updates:</b> come back to this page and click Install again.</li>
+    </ul>
+  </div>
+
+  <p class="small">Need help? Contact Yolo Campervans. Firmware is provided as-is for use with Yolo display kits.</p>
+</main>
+<script>
+  if (!('serial' in navigator)) document.getElementById('unsupported').hidden = false;
+</script>
+</body>
+</html>
