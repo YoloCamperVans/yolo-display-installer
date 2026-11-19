@@ -1,0 +1,16 @@
+{
+  "name": "Yolo VanDisplay 2.8C",
+  "version": "1.0.0",
+  "new_install_prompt_erase": true,
+  "builds": [
+    {
+      "chipFamily": "ESP32-S3",
+      "parts": [
+        { "path": "firmware/vandisplay-28c-bootloader.bin", "offset": 0 },
+        { "path": "firmware/vandisplay-28c-partitions.bin", "offset": 32768 },
+        { "path": "firmware/vandisplay-28c-boot_app0.bin", "offset": 57344 },
+        { "path": "firmware/vandisplay-28c-app.bin", "offset": 65536 }
+      ]
+    }
+  ]
+}

@@ -36,7 +36,12 @@
 
   <div class="card">
     <h2>What you need</h2>
-    <div class="board"><div><b>Waveshare ESP32-S3-Touch-LCD-1.46</b><span class="small">Round 1.46" touch display. Other boards or versions won't work.</span></div></div>
+    <label class="small" for="board" style="display:block;margin-bottom:6px">Your display</label>
+    <select id="board" style="font-size:16px;padding:10px 12px;border-radius:8px;border:1px solid var(--line);width:100%;background:#fff">
+      <option value="manifest-146.json">Waveshare ESP32-S3-Touch-LCD-1.46 (round 1.46")</option>
+      <option value="manifest-28c.json">Waveshare ESP32-S3-Touch-LCD-2.8C (round 2.8")</option>
+    </select>
+    <p class="small" style="margin:8px 0 0">Only these exact boards are supported. Other boards or versions won't work.</p>
     <ul style="margin-top:12px">
       <li>A USB-C <b>data</b> cable (some cables only charge)</li>
       <li>A computer with Chrome, Edge, Opera or Firefox (not Safari, not a phone)</li>
@@ -46,14 +51,14 @@
   <div class="card">
     <h2>1. Install</h2>
     <ol>
-      <li><b>Hold the BOOT button</b> on the edge of the display, plug it into this computer, then let go.</li>
+      <li><b>Hold the BOOT button</b> on the display, plug it into this computer, then let go.</li>
       <li>Click <b>Install</b>, choose the port that appears (often "USB JTAG/serial debug unit"), and confirm.</li>
       <li>Wait for "Installation complete" (1–2 minutes). Don't unplug during install.</li>
       <li><b>Unplug the display and plug it back in</b> (without holding BOOT) to start it.</li>
     </ol>
     <p id="unsupported" class="warn" hidden>This browser can't install firmware. Use Chrome, Edge, Opera or Firefox on a computer.</p>
     <div style="margin-top:18px">
-      <esp-web-install-button manifest="manifest-146.json">
+      <esp-web-install-button id="installer" manifest="manifest-146.json">
         <button slot="activate">Install</button>
         <span slot="unsupported"></span>
         <span slot="not-allowed">This page must be opened over https.</span>
@@ -91,6 +96,9 @@
   <p class="small">Need help? Contact Yolo Campervans. Firmware is provided as-is for use with Yolo display kits.</p>
 </main>
 <script>
+  const sel = document.getElementById('board');
+  const btn = document.getElementById('installer');
+  sel.addEventListener('change', () => btn.setAttribute('manifest', sel.value));
   if (!('serial' in navigator)) document.getElementById('unsupported').hidden = false;
 </script>
 </body>
